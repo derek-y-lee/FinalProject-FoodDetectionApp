@@ -7,32 +7,32 @@
 
 ##Q1: Learn by Doing
 &nbsp;
+#####In this problem, Derek chose the model while Ellen & Sean jointly tested the model and changed the parameters.
+&nbsp;
 #####We reproduced the results in the blog using the given code. First, install necessary packages:
 &nbsp;
 ```{R}
-
 # Keras + TensorFlow and it's dependencies
-install.packages("keras")
+install.packages("keras", repos = "http://cran.us.r-project.org")
 library(keras)
 install_keras()
 
 # Tidyverse (readr, ggplot2, etc.)
-install.packages("tidyverse")
+install.packages("tidyverse", repos = "http://cran.us.r-project.org")
 
 # Packages for sequence logos and peptides
 devtools::install_github("omarwagih/ggseqlogo")
 devtools::install_github("leonjessen/PepTools")
-
+```
+&nbsp;
+#####Start:
+&nbsp;
+```{R}
 library(keras)
 library(tidyverse)
 library(PepTools)
 
-```
-&nbsp;
-#####Now, load the data:
-&nbsp;
-```{R}
-
+# reading in data
 pep_file <- get_file(
   "ran_peps_netMHCpan40_predicted_A0201_reduced_cleaned_balanced.tsv", 
   origin = "https://git.io/vb3Xa"
@@ -41,29 +41,23 @@ pep_dat <- read_tsv(file = pep_file)
 
 pep_dat %>% group_by(label_chr, data_type) %>% summarise(n = n())
 
-pep_dat %>% filter(label_chr=='SB') %>% pull(peptide) %>% ggseqlogo()
-
 pep_dat %>% filter(label_chr=='SB') %>% head(1) %>% pull(peptide) %>% pep_plot_images
 
 str(pep_encode(c("LLTDAQRIV", "LLTDAQRIV")))
 
-```
-&nbsp;
-#####Then,
-&nbsp;
-```{R}
-
+# turning into arrays
 x_train <- pep_dat %>% filter(data_type == 'train') %>% pull(peptide)   %>% pep_encode
 y_train <- pep_dat %>% filter(data_type == 'train') %>% pull(label_num) %>% array
 x_test  <- pep_dat %>% filter(data_type == 'test')  %>% pull(peptide)   %>% pep_encode
 y_test  <- pep_dat %>% filter(data_type == 'test')  %>% pull(label_num) %>% array
 
+# creating final arrays to feed into model
 x_train <- array_reshape(x_train, c(nrow(x_train), 9 * 20))
 x_test  <- array_reshape(x_test,  c(nrow(x_test), 9 * 20))
-
 y_train <- to_categorical(y_train, num_classes = 3)
 y_test  <- to_categorical(y_test,  num_classes = 3)
 
+# defining model
 model <- keras_model_sequential() %>% 
   layer_dense(units  = 180, activation = 'relu', input_shape = 180) %>% 
   layer_dropout(rate = 0.4) %>% 
@@ -71,12 +65,14 @@ model <- keras_model_sequential() %>%
   layer_dropout(rate = 0.3) %>%
   layer_dense(units  = 3, activation   = 'softmax')
 
+# training and evaluating model
 model %>% compile(
   loss      = 'categorical_crossentropy',
   optimizer = optimizer_rmsprop(),
   metrics   = c('accuracy')
 )
 
+# compiling model
 history = model %>% fit(
   x_train, y_train, 
   epochs = 150, 
@@ -85,110 +81,37 @@ history = model %>% fit(
 )
 
 plot(history)
-
 ```
 &nbsp;
-#####Then,
+#####For 2nd part of question 1
 &nbsp;
-```{R}
-
-perf = model %>% evaluate(x_test, y_test)
-perf
-
-acc     = perf$acc %>% round(3)*100
-y_pred  = model %>% predict_classes(x_test)
-y_real  = y_test %>% apply(1,function(x){ return( which(x==1) - 1) })
-results = tibble(y_real = y_real %>% factor, y_pred = y_pred %>% factor,
-                 Correct = ifelse(y_real == y_pred,"yes","no") %>% factor)
-title = 'Performance on 10% unseen data - Feed Forward Neural Network'
-xlab  = 'Measured (Real class, as predicted by netMHCpan-4.0)'
-ylab  = 'Predicted (Class assigned by Keras/TensorFlow deep FFN)'
-results %>%
-  ggplot(aes(x = y_pred, y = y_real, colour = Correct)) +
-  geom_point() +
-  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc,"%")) +
-  xlab(xlab) +
-  ylab(ylab) +
-  scale_color_manual(labels = c('No', 'Yes'),
-                     values = c('tomato','cornflowerblue')) +
-  geom_jitter() +
-  theme_bw()
-
-```
-&nbsp;
-#####Then,
-&nbsp;
-```{R}
-
-model <- keras_model_sequential() %>%
-  layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu',
-                input_shape = c(9, 20, 1)) %>%
-  layer_dropout(rate = 0.25) %>% 
-  layer_flatten() %>% 
-  layer_dense(units  = 180, activation = 'relu') %>% 
+```{r}
+# defining model
+model2 <- keras_model_sequential() %>% 
+  layer_dense(units  = 180, activation = 'relu', input_shape = 180) %>% 
   layer_dropout(rate = 0.4) %>% 
   layer_dense(units  = 90, activation  = 'relu') %>%
   layer_dropout(rate = 0.3) %>%
   layer_dense(units  = 3, activation   = 'softmax')
 
-```
-&nbsp;
-#####Then,
-&nbsp;
-```{R}
+# training and evaluating model
+model2 %>% compile(
+  loss      = 'categorical_crossentropy',
+  optimizer = optimizer_rmsprop(lr=0.0005, rho=0.9, decay=0.0),
+  metrics   = c('accuracy')
+)
 
-# Setup training data
-target  <- 'train'
-x_train <- pep_dat %>% filter(data_type==target) %>% pull(peptide) %>%
-  pep_encode_mat %>% select(-peptide)
-y_train <- pep_dat %>% filter(data_type==target) %>% pull(label_num) %>% factor
-
-# Setup test data
-target <- 'test'
-x_test <- pep_dat %>% filter(data_type==target) %>% pull(peptide) %>%
-  pep_encode_mat %>% select(-peptide)
-y_test <- pep_dat %>% filter(data_type==target) %>% pull(label_num) %>% factor
-
-rf_classifier <- randomForest(x = x_train, y = y_train, ntree = 100)
-
-y_pred    <- predict(rf_classifier, x_test)
-n_correct <- table(observed = y_test, predicted = y_pred) %>% diag %>% sum
-acc       <- (n_correct / length(y_test)) %>% round(3) * 100
-results   <- tibble(y_real  = y_test,
-                   y_pred  = y_pred,
-                   Correct = ifelse(y_real == y_pred,"yes","no") %>% factor)
-
-title = "Performance on 10% unseen data - Random Forest"
-xlab  = "Measured (Real class, as predicted by netMHCpan-4.0)"
-ylab  = "Predicted (Class assigned by random forest)"
-f_out = "plots/03_rf_01_results_3_by_3_confusion_matrix.png"
-results %>%
-  ggplot(aes(x = y_pred, y = y_real, colour = Correct)) +
-  geom_point() +
-  xlab(xlab) +
-  ylab(ylab) +
-  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc,"%")) +
-  scale_color_manual(labels = c('No', 'Yes'),
-                     values = c('tomato','cornflowerblue')) +
-  geom_jitter() +
-  theme_bw()
-
-```
-&nbsp;
-#####For our twist, we elected to change the validation split.
-&nbsp;
-```{R}
-history = model %>% fit(
+# compiling model
+history2 = model2 %>% fit(
   x_train, y_train, 
   epochs = 150, 
   batch_size = 50, 
-  validation_split = 0.1
+  validation_split = 0.2
 )
 
-plot(history)
+plot(history2)
 ```
-
-
+&nbsp;
 ## Q2 Deep learning on smart phone
 
 Professor May Wang in Department of Community Health Sciences (CHS) studies obesity in children and intervention strategies to prevent obesity. She asked me whether it is possible to develop an app such that a user takes a photo of a meal and the app will recognize and record the type of food (pizza, mac and cheese, burger, ...). 
