@@ -15,6 +15,7 @@ For this homework, you can work as a team of size $\le 5$. You can create a new 
 I found the [TensorFlow for R Blog](https://blogs.rstudio.com/tensorflow/) series at RStudio quite illuminating. Choose one blog that interests you and do following.  
 
 1. Reproduce the results in the blog.  
+https://blogs.rstudio.com/tensorflow/posts/2018-01-29-dl-for-cancer-immunotherapy/
 ```{r}
 # Keras + TensorFlow and it's dependencies
 install.packages("keras")
