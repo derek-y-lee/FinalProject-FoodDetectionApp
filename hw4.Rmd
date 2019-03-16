@@ -149,8 +149,7 @@ history2 = model2 %>%
     x_train, y_train, 
     epochs = 150, 
     batch_size = 50, 
-    validation_split = 0.5
-)
+    validation_split = 0.5)
 
 plot(history2)
 ```
