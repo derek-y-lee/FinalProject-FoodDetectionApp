@@ -6,18 +6,31 @@
 &nbsp;
 
 ##Q1: Learn by Doing
+
 &nbsp;
-##### We chose the "Deep Learning for Cancer Immunotherapy" blog on Rstudio as our tensorflow for R example. It can be found at https://blogs.rstudio.com/tensorflow/posts/2018-01-29-dl-for-cancer-immunotherapy/.
+
+We chose the "Deep Learning for Cancer Immunotherapy" blog on Rstudio as our tensorflow for R example. It can be found at https://blogs.rstudio.com/tensorflow/posts/2018-01-29-dl-for-cancer-immunotherapy/.
+
 &nbsp;
-##### Protein binding is largely a function of functional groups on amino acid chains (nonpolar sidechains can bind by Van Der Waal's forces forcing them to the center of a protein, weakly-charged sidechains can bind by electrostatic attraction while covalent bonds can form between specific sidechains). However, although all amino acids and their structure, chemical properties and binding properties are individually known, it is not possible to be able to fully know what is actually happening when peptides form a chain. Different environments can induce different properties of a peptide chain, especially in the compartmentalized environement of living organisms.
+
+Protein binding is largely a function of functional groups on amino acid chains (nonpolar sidechains can bind by Van Der Waal's forces forcing them to the center of a protein, weakly-charged sidechains can bind by electrostatic attraction while covalent bonds can form between specific sidechains). However, although all amino acids and their structure, chemical properties and binding properties are individually known, it is not possible to be able to fully know what is actually happening when peptides form a chain. Different environments can induce different properties of a peptide chain, especially in the compartmentalized environment of living organisms.
+
 &nbsp;
-##### Peptide chains are an integral part of immunology as they form the class of molecules known as antibodies. It is thought that immunology might hold treatments for a class of diseases not often thought to be related to fighting pathogens: cancer.
+
+Peptide chains are an integral part of immunology as they form the class of molecules known as antibodies. It is thought that immunology might hold treatments for a class of diseases not often thought to be related to fighting pathogens: cancer.
+
 &nbsp;
-##### Being able to predict binding properties of peptide chains quickly may hasten understanding of immunological mechanisms behind natural cancer defenses of the body and possible new treatments for cancer.
+
+Being able to predict binding properties of peptide chains quickly may hasten understanding of immunological mechanisms behind natural cancer defenses of the body and possible new treatments for cancer.
+
 &nbsp;
-##### However, there are many different types of peptide chains. We would like to use a deep learning model to be able to predict binding properties. We will use a classification model to predict, from an peptide chain of length 8, whether the peptide is weakly-binding, nonbinding, or strong-binding.
+
+However, there are many different types of peptide chains. We would like to use a deep learning model to be able to predict binding properties. We will use a classification model to predict, from an peptide chain of length 8, whether the peptide is weakly-binding, nonbinding, or strong-binding.
+
 &nbsp;
-##### Derek chose the model while Ellen & Sean jointly tested the model and changed the parameters. We reproduced the results in the blog using the given code, and then we changed the training parameters: we made the validation split 50% from the original 20%.
+
+Derek chose the model while Ellen & Sean jointly tested the model and changed the parameters. We reproduced the results in the blog using the given code, and then we changed the training parameters: we made the validation split 50% from the original 20%.
+
 &nbsp;
 ```{R}
 # Install Keras, Tensorflow and its dependencies
@@ -110,7 +123,9 @@ history = model %>%
 plot(history)
 ```
 &nbsp;
-##### Our "twist" is a 50% validation split (50% of data will be training while 50% of data will be testing). We expect the accuracy to decrease because of the dearth of input data for training versus the 20% validation split. We will now run model 2.
+
+Our "twist" is a 50% validation split (50% of data will be training while 50% of data will be testing). We expect the accuracy to decrease because of the dearth of input data for training versus the 20% validation split. We will now run model 2.
+
 &nbsp;
 ```{r}
 # Define model 2
@@ -140,8 +155,10 @@ history2 = model2 %>%
 plot(history2)
 ```
 &nbsp;
-##### We can see that changing the validation split to 50% lowered the accuracy of the model.
+
+We can see that changing the validation split to 50% lowered the accuracy of the model.
+
 &nbsp;
 ## Q2: Deep Learning on Smart Phone
 &nbsp;
-##### Our Android app can be found within the hw4 repository. Please view app within Android Studio or an Android phone.
+Our Android app can be found within the hw4 repository. Please view app within Android Studio or an Android phone.
