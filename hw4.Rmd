@@ -7,117 +7,141 @@
 
 ##Q1: Learn by Doing
 &nbsp;
-#####In this problem, Derek chose the model while Ellen & Sean jointly tested the model and changed the parameters.
+##### We chose the "Deep Learning for Cancer Immunotherapy" blog on Rstudio as our tensorflow for R example. It can be found at https://blogs.rstudio.com/tensorflow/posts/2018-01-29-dl-for-cancer-immunotherapy/.
 &nbsp;
-#####We reproduced the results in the blog using the given code. First, install necessary packages:
+##### Protein binding is largely a function of functional groups on amino acid chains (nonpolar sidechains can bind by Van Der Waal's forces forcing them to the center of a protein, weakly-charged sidechains can bind by electrostatic attraction while covalent bonds can form between specific sidechains). However, although all amino acids and their structure, chemical properties and binding properties are individually known, it is not possible to be able to fully know what is actually happening when peptides form a chain. Different environments can induce different properties of a peptide chain, especially in the compartmentalized environement of living organisms.
+&nbsp;
+##### Peptide chains are an integral part of immunology as they form the class of molecules known as antibodies. It is thought that immunology might hold treatments for a class of diseases not often thought to be related to fighting pathogens: cancer.
+&nbsp;
+##### Being able to predict binding properties of peptide chains quickly may hasten understanding of immunological mechanisms behind natural cancer defenses of the body and possible new treatments for cancer.
+&nbsp;
+##### However, there are many different types of peptide chains. We would like to use a deep learning model to be able to predict binding properties. We will use a classification model to predict, from an peptide chain of length 8, whether the peptide is weakly-binding, nonbinding, or strong-binding.
+&nbsp;
+##### Derek chose the model while Ellen & Sean jointly tested the model and changed the parameters. We reproduced the results in the blog using the given code, and then we changed the training parameters: we made the validation split 50% from the original 20%.
 &nbsp;
 ```{R}
-# Keras + TensorFlow and it's dependencies
+# Install Keras, Tensorflow and its dependencies
 install.packages("keras", repos = "http://cran.us.r-project.org")
 library(keras)
 install_keras()
 
-# Tidyverse (readr, ggplot2, etc.)
+# Install Tidyverse
 install.packages("tidyverse", repos = "http://cran.us.r-project.org")
 
-# Packages for sequence logos and peptides
+# Install packages for sequence logos and peptides
 devtools::install_github("omarwagih/ggseqlogo")
 devtools::install_github("leonjessen/PepTools")
-```
-&nbsp;
-#####Start:
-&nbsp;
-```{R}
+
+#Activate packages
 library(keras)
 library(tidyverse)
 library(PepTools)
+library(dplyr)
 
-# reading in data
+#Read-in data
 pep_file <- get_file(
   "ran_peps_netMHCpan40_predicted_A0201_reduced_cleaned_balanced.tsv", 
-  origin = "https://git.io/vb3Xa"
-) 
+   origin = "https://git.io/vb3Xa") 
+
 pep_dat <- read_tsv(file = pep_file)
 
-pep_dat %>% group_by(label_chr, data_type) %>% summarise(n = n())
+pep_dat %>% 
+  group_by(label_chr, data_type) %>% 
+  summarise(n = n())
 
-pep_dat %>% filter(label_chr=='SB') %>% head(1) %>% pull(peptide) %>% pep_plot_images
+pep_dat %>% 
+  filter(label_chr == 'SB') %>% 
+  head(1) %>% 
+  pull(peptide) %>% 
+  pep_plot_images
 
 str(pep_encode(c("LLTDAQRIV", "LLTDAQRIV")))
 
-# turning into arrays
-x_train <- pep_dat %>% filter(data_type == 'train') %>% pull(peptide)   %>% pep_encode
-y_train <- pep_dat %>% filter(data_type == 'train') %>% pull(label_num) %>% array
-x_test  <- pep_dat %>% filter(data_type == 'test')  %>% pull(peptide)   %>% pep_encode
-y_test  <- pep_dat %>% filter(data_type == 'test')  %>% pull(label_num) %>% array
+# Turn data into arrays
+x_train <- pep_dat %>% 
+  filter(data_type == 'train') %>% 
+  pull(peptide) %>% 
+  pep_encode
 
-# creating final arrays to feed into model
+y_train <- pep_dat %>% 
+  filter(data_type == 'train') %>% 
+  pull(label_num) %>% 
+  array
+
+x_test  <- pep_dat %>% 
+  filter(data_type == 'test') %>% 
+  pull(peptide) %>% 
+  pep_encode
+
+y_test  <- pep_dat %>% 
+  filter(data_type == 'test') %>% 
+  pull(label_num) %>% 
+  array
+
+# Create final arrays to feed into model
 x_train <- array_reshape(x_train, c(nrow(x_train), 9 * 20))
 x_test  <- array_reshape(x_test,  c(nrow(x_test), 9 * 20))
 y_train <- to_categorical(y_train, num_classes = 3)
 y_test  <- to_categorical(y_test,  num_classes = 3)
 
-# defining model
+# Define model
 model <- keras_model_sequential() %>% 
-  layer_dense(units  = 180, activation = 'relu', input_shape = 180) %>% 
+  layer_dense(units = 180, activation = 'relu', input_shape = 180) %>% 
   layer_dropout(rate = 0.4) %>% 
-  layer_dense(units  = 90, activation  = 'relu') %>%
+  layer_dense(units = 90, activation = 'relu') %>%
   layer_dropout(rate = 0.3) %>%
-  layer_dense(units  = 3, activation   = 'softmax')
+  layer_dense(units = 3, activation = 'softmax')
 
-# training and evaluating model
-model %>% compile(
-  loss      = 'categorical_crossentropy',
-  optimizer = optimizer_rmsprop(),
-  metrics   = c('accuracy')
-)
+# Train and evaluate model
+model %>% 
+  compile(
+    loss = 'categorical_crossentropy',
+    optimizer = optimizer_rmsprop(),
+    metrics = c('accuracy'))
 
-# compiling model
-history = model %>% fit(
-  x_train, y_train, 
-  epochs = 150, 
-  batch_size = 50, 
-  validation_split = 0.2
-)
+# Compile model
+history = model %>% 
+  fit(
+    x_train, y_train, 
+    epochs = 150, 
+    batch_size = 50, 
+    validation_split = 0.2)
 
 plot(history)
 ```
 &nbsp;
-#####For 2nd part of question 1
+##### Our "twist" is a 50% validation split (50% of data will be training while 50% of data will be testing). We expect the accuracy to decrease because of the dearth of input data for training versus the 20% validation split. We will now run model 2.
 &nbsp;
 ```{r}
-# defining model
+# Define model 2
 model2 <- keras_model_sequential() %>% 
-  layer_dense(units  = 180, activation = 'relu', input_shape = 180) %>% 
+  layer_dense(units = 180, activation = 'relu', input_shape = 180) %>% 
   layer_dropout(rate = 0.4) %>% 
-  layer_dense(units  = 90, activation  = 'relu') %>%
+  layer_dense(units = 90, activation = 'relu') %>%
   layer_dropout(rate = 0.3) %>%
-  layer_dense(units  = 3, activation   = 'softmax')
+  layer_dense(units = 3, activation = 'softmax')
 
-# training and evaluating model
-model2 %>% compile(
-  loss      = 'categorical_crossentropy',
-  optimizer = optimizer_rmsprop(lr=0.0005, rho=0.9, decay=0.0),
-  metrics   = c('accuracy')
-)
+# Train and evaluate model
+model2 %>% 
+  compile(
+    loss= 'categorical_crossentropy',
+    optimizer = optimizer_rmsprop(lr = 0.0005, rho = 0.9, decay = 0.0),
+    metrics = c('accuracy'))
 
-# compiling model
-history2 = model2 %>% fit(
-  x_train, y_train, 
-  epochs = 150, 
-  batch_size = 50, 
-  validation_split = 0.2
+# Compile model 2
+history2 = model2 %>% 
+  fit(
+    x_train, y_train, 
+    epochs = 150, 
+    batch_size = 50, 
+    validation_split = 0.5
 )
 
 plot(history2)
 ```
 &nbsp;
-## Q2 Deep learning on smart phone
-
-Professor May Wang in Department of Community Health Sciences (CHS) studies obesity in children and intervention strategies to prevent obesity. She asked me whether it is possible to develop an app such that a user takes a photo of a meal and the app will recognize and record the type of food (pizza, mac and cheese, burger, ...). 
-
-Your job: produce a prototype app for iPhone or Android smart phone. 
-
-Resources:  
-1. There are plenty of tutorials and YouTube clips on making apps for iPhone or Android.  
-2. Google's [Cloud Vision API](https://cloud.google.com/vision/) may supply an easy solution. 
+##### We can see that changing the validation split to 50% lowered the accuracy of the model.
+&nbsp;
+## Q2: Deep Learning on Smart Phone
+&nbsp;
+##### Our Android app can be found within the hw4 repository. Please view app within Android Studio or an Android phone.
