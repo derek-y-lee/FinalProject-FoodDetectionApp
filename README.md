@@ -1,6 +1,6 @@
 # Homework 4 Food Recognition App: Readme
 
-### Acknowledgement must be given to Google® for gracious open source provisions, most notably the [mlkit](https://github.com/firebase/quickstart-android) package.
+### Acknowledgement must be given to Google® for their open source provisions, most notably the [mlkit](https://github.com/firebase/quickstart-android) package. We would like to thank them for their generosity.
 
 ### Note: for reproducibility, please be sure to follow instructions below.
 
