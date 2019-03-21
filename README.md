@@ -1,3 +1,5 @@
+![alt text](https://previews.123rf.com/images/bdcollins/bdcollins1408/bdcollins140800228/30927502-random-foods-collage-isolated-over-white.jpg)
+
 # Homework 4 Food Recognition App: Readme
 
 ### Acknowledgement must be given to Google® for their open source provisions, most notably the [mlkit](https://github.com/firebase/quickstart-android) package.
