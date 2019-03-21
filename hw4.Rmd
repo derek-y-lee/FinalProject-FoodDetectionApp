@@ -13,7 +13,13 @@ We chose the "Deep Learning for Cancer Immunotherapy" blog on Rstudio as our ten
 
 &nbsp;
 
-Protein binding is largely a function of functional groups on amino acid chains (nonpolar sidechains can bind by Van Der Waal's forces forcing them to the center of a protein, weakly-charged sidechains can bind by electrostatic attraction while covalent bonds can form between specific sidechains). However, although all amino acids and their structure, chemical properties and binding properties are individually known, it is not possible to be able to fully know what is actually happening when peptides form a chain. Different environments can induce different properties of a peptide chain, especially in the compartmentalized environment of living organisms.
+Just to give a basic overview of the purpose of the tensorflow for R example, it is useful to understand the biological background for this application. Cancer
+
+Understanding protein binding is important because in order to target and eliminate cancer cells, we must understand how antibodies bind to proteins that are present on a cell's surface. Once antibodies bind to a cell, special immune cells called T-cells that patrol our body will terminate cells that have been tagged for elimination by antibodies.
+
+Protein binding is largely a function of functional groups on amino acid chains (nonpolar sidechains can bind by Van Der Waal's forces forcing them to the center of a protein, weakly-charged sidechains can bind by electrostatic attraction while covalent bonds can form between specific sidechains). However, although all amino acids and their structure, chemical properties and binding properties are individually known, it is not possible to be able to fully know what is actually happening when peptides form a chain. Different environments can induce different properties of a peptide chain, especially in the compartmentalized environment of living organisms. (https://www.ncbi.nlm.nih.gov/books/NBK26830/)
+
+Why do these different bonds matter? Well, in this Peptide Classification Model, models are applied to classify whether a given peptide is a 'strong binder', 'weak binder', or a 'non-binder' to understand which peptides will be presented to the T-cells. 
 
 &nbsp;
 
@@ -25,7 +31,7 @@ Being able to predict binding properties of peptide chains quickly may hasten un
 
 &nbsp;
 
-However, there are many different types of peptide chains. We would like to use a deep learning model to be able to predict binding properties. We will use a classification model to predict, from an peptide chain of length 8, whether the peptide is weakly-binding, nonbinding, or strong-binding.
+Thus, this classification model will predict, from an peptide chain of length 8, whether the peptide is weakly-binding, nonbinding, or strong-binding through 3 methods: a fully connected artificial neural network (ANN), a convolutional ANN, and a random forest model. 
 
 &nbsp;
 
