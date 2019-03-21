@@ -3,8 +3,13 @@
 # Homework 4 Food Recognition App: Readme
 
 ### Acknowledgement must be given to Google® for their open source provisions, most notably the [mlkit](https://github.com/firebase/quickstart-android) package.
+### MEMBER CONTRIBUTIONS: Sean worked on Q1, github troubleshooting, and testing for Q2
+### Derek worked on Q1 and testing for Q2
+### Ellen worked on Q2
 
-### Note: for reproducibility, please be sure to follow instructions below.
+##### NOTE: for reproducibility, please be sure to follow instructions below
+##### NOTE: make sure you sign into your gmail account via Google Chrome
+##### NOTE: upload any test images onto your google drive before hand
 
 ##### 1. Install the latest version of Android Studio® which can be found online.
 
@@ -21,9 +26,6 @@
 ##### 7. It is suggested to use a Nexus 5 for its naturally larger resolution.
 
 ##### 8. Run Java > StillImageActivity > Take photo > Select photo
-
-##### NOTE: the app will prompt you to sign into your google/gmail account.
-##### NOTE: upload any test images onto your google drive before hand.
 
 
 
