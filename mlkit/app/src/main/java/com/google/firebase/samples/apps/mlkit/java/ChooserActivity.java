@@ -52,7 +52,7 @@ public final class ChooserActivity extends AppCompatActivity
 
   private static final int[] DESCRIPTION_IDS =
       new int[] {
-        R.string.desc_camera_source_activity, R.string.desc_still_image_activity,
+        R.string.desc_still_image_activity,
       };
 
   @Override
