@@ -25,7 +25,7 @@
 
 ##### 7. It is suggested to use a Nexus 5 for its naturally larger resolution.
 
-##### 8. Run Java > StillImageActivity > Take photo > Select photo
+##### 8. Run Java > StillImageActivity > Take photo > Select photo > navigate to your google drive by clicking the top icon
 
 
 
