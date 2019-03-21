@@ -21,8 +21,6 @@
         <activity
             android:name="com.google.firebase.samples.apps.mlkit.java.ChooserActivity"/>
 
-        <activity
-            android:name="com.google.firebase.samples.apps.mlkit.kotlin.ChooserActivity"/>
 
 
         <activity
@@ -36,18 +34,10 @@
         </activity>
 
 
-        <activity android:name=".java.LivePreviewActivity" android:exported="true">
-        </activity>
-
-        <activity android:name=".kotlin.LivePreviewActivity" android:exported="true"/>
-
-
         <activity android:name=".java.StillImageActivity"
             android:exported="true">
         </activity>
 
-        <activity android:name=".kotlin.StillImageActivity"
-            android:exported="true"/>
     </application>
 
 </manifest>
