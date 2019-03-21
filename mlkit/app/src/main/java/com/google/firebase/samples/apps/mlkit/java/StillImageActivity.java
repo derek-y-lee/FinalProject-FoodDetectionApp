@@ -41,9 +41,6 @@ import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
 import com.google.firebase.samples.apps.mlkit.common.VisionImageProcessor;
 import com.google.firebase.samples.apps.mlkit.java.cloudimagelabeling.CloudImageLabelingProcessor;
-import com.google.firebase.samples.apps.mlkit.java.cloudlandmarkrecognition.CloudLandmarkRecognitionProcessor;
-import com.google.firebase.samples.apps.mlkit.java.cloudtextrecognition.CloudDocumentTextRecognitionProcessor;
-import com.google.firebase.samples.apps.mlkit.java.cloudtextrecognition.CloudTextRecognitionProcessor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,9 +53,6 @@ public final class StillImageActivity extends AppCompatActivity {
   private static final String TAG = "StillImageActivity";
 
   private static final String CLOUD_LABEL_DETECTION = "Cloud Label";
-  private static final String CLOUD_LANDMARK_DETECTION = "Landmark";
-  private static final String CLOUD_TEXT_DETECTION = "Cloud Text";
-  private static final String CLOUD_DOCUMENT_TEXT_DETECTION = "Doc Text";
 
   private static final String SIZE_PREVIEW = "w:max"; // Available on-screen width.
   private static final String SIZE_1024_768 = "w:1024"; // ~1024*768 in a normal ratio
@@ -159,9 +153,6 @@ public final class StillImageActivity extends AppCompatActivity {
     Spinner featureSpinner = (Spinner) findViewById(R.id.featureSelector);
     List<String> options = new ArrayList<>();
     options.add(CLOUD_LABEL_DETECTION);
-    options.add(CLOUD_LANDMARK_DETECTION);
-    options.add(CLOUD_TEXT_DETECTION);
-    options.add(CLOUD_DOCUMENT_TEXT_DETECTION);
     // Creating adapter for featureSpinner
     ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_style, options);
     // Drop down layout style - list view with radio button
@@ -365,15 +356,8 @@ public final class StillImageActivity extends AppCompatActivity {
       case CLOUD_LABEL_DETECTION:
         imageProcessor = new CloudImageLabelingProcessor();
         break;
-      case CLOUD_LANDMARK_DETECTION:
-        imageProcessor = new CloudLandmarkRecognitionProcessor();
-        break;
-      case CLOUD_TEXT_DETECTION:
-        imageProcessor = new CloudTextRecognitionProcessor();
-        break;
-      case CLOUD_DOCUMENT_TEXT_DETECTION:
-        imageProcessor = new CloudDocumentTextRecognitionProcessor();
-        break;
+
+
       default:
         throw new IllegalStateException("Unknown selectedMode: " + selectedMode);
     }
