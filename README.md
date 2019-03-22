@@ -11,12 +11,14 @@
 
 ##### NOTE: Upload any test images onto your Google Drive beforehand so you can access it via Google Drive in the emulator.
 
+##### NOTE: If you run into any build errors, make sure that the packages have been installed and the google-services.json has been placed in the app folder within mlkit (mlkit>app) and then try to run again.
+
 
 ##### 1. Install the latest version of Android Studio® which can be found [online](https://developer.android.com/studio/install).
 
 ##### 2. Clone (or fork, then clone) the [hw4](https://github.com/seancampeau/hw4) repository to your Android Studio® working directory in your local machine.
 
-##### 3. Open Android Studio® (Create New Project option) and wait for it to build. Install any updates (including when it prompts you to install the SDK packages). 
+##### 3. Open Android Studio® (Create New Project option) and wait for it to build. Install any updates (including when it prompts you to install the SDK packages) though this may happen when you actually import the actual project we want (Step 5).
 
 ![alt text](https://i.imgur.com/fYs8mm1.png)
 
@@ -24,13 +26,23 @@
 
 ![alt text](https://i.imgur.com/1ibb5oR.png)
   
-##### 4. In Finder (Mac), locate the "m280" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. (macOS deletes the .json file from the m280 > mlkit > app folder, so this must be done manually).
+##### 4. In Finder (Mac), locate the "hw4-master" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. (macOS deletes the .json file from the m280 > mlkit > app folder, so this must be done manually).
 
-##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project. 
+##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project and selecting the "m280" folder within the "hw4-master" folder
 
 ![alt text](https://i.imgur.com/hvG4eCR.png)
 
-##### 6. Android Studio® will now automatically build the app.
+![alt text](https://i.imgur.com/S9xAdhd.png)
+
+##### 5.5. Click next throughout the process (see images below as guide). The SDK installation is probably at this step. There will likely be a prompt to configure Kotlin. Just select that message and click on the Java module version.
+
+![alt text](https://i.imgur.com/8az58I7.png)
+
+![alt text](https://i.imgur.com/HT2zDEC.png)
+
+![alt text](https://i.imgur.com/NpbrQjR.png)
+
+##### 6. Android Studio® will now automatically build the app, but now you have to open up the emulator.
 
 ##### 7. On the top right corner in the Android Studio IDE, locate the green play button next to the dropdown menu that displays "mlkit-app" to Run Java.
 
