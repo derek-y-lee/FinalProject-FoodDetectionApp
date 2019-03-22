@@ -3,31 +3,31 @@
 # Homework 4 Food Recognition App: ReadMe
 
 ### Acknowledgement must be given to Google® for their open source provisions, most notably the [mlkit](https://github.com/firebase/quickstart-android) package.
+
 ### MEMBER CONTRIBUTIONS:
 ##### Responsibilities: Everyone contributed to all parts of the project, but number 1 was mainly done by Sean and the app (number 2) was mainly completed by Ellen and Derek.
 
 
-##### NOTE: For reproducibility, please be sure to follow instructions below
+##### NOTE: For reproducibility, please be sure to follow instructions below.
+
 ##### NOTE: Make sure you sign into your Gmail account via Google Chrome on the emulator once it starts. To return to the app, click on the square button on the bottom right and scroll through apps till you find the mlk-test app.
 
-##### NOTE: upload any test images onto your Google Drive beforehand so you can access it via Google Drive in the emulator
+##### NOTE: Upload any test images onto your Google Drive beforehand so you can access it via Google Drive in the emulator.
 
 
-##### 1. Install the latest version of Android Studio® which can be found [online](https://developer.android.com/studio/install)
+##### 1. Install the latest version of Android Studio® which can be found [online](https://developer.android.com/studio/install).
 
 ##### 2. Clone (or fork, then clone) the [hw4](https://github.com/seancampeau/hw4) repository to your local machine's Android Studio® working directory.
 
 ##### 3. Open Android Studio® and install updates, especially when it prompts you install the SDK packages. 
 
-![alt text](https://i.imgur.com/JHCS33o.png)
+![alt text](https://i.imgur.com/fYs8mm1.png)
 
 ##### Do NOT opt for Instant Run. Alternatively if you accidentally did, simply go to Android Studio > Preferences and navigate to the Instant Run sidebar option where you can select to uncheck the "Enable Instant Run"
 
 ![alt text](https://i.imgur.com/1ibb5oR.png)
   
-##### 4. In Finder (Mac), locate the 'm280' folder within the cloned repo and copy the "google-services.json" file and paste it in mlkit > app folder. For some reason, Mac deletes the .json file from the m280 > mlkit > app folder. 
-
-![alt text](https://i.imgur.com/iwRWVPH.png)
+##### 4. In Finder (Mac), locate the "m280" folder within the cloned repo and copy the "google-services.json" file and paste it in mlkit > app folder. For some reason, Mac deletes the .json file from the m280 > mlkit > app folder. 
 
 ##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project 
 
@@ -54,6 +54,3 @@
 ##### 10. In the emulator, select StillImageActivity > Take Photo > Select image from album  > navigate to the Google Drive folder "images" with the test images by toggling the upper left logo with the horizontal bars. Select the image and the app should display text describing what objects are in the image.
 
 ![alt text](https://i.imgur.com/etDfMnP.png)
-
-
-##### This was a collaborative effort between Sean Campeau, Ellen Do and Derek Lee. Acknowledgements specific to each task in the assignment can be found in the hw4.Rmd file.
