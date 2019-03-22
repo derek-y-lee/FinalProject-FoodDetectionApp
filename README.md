@@ -17,7 +17,7 @@
 ##### 2. Clone (or fork, then clone) the [hw4](https://github.com/seancampeau/hw4) repository to your local machine's Android Studio® working directory.
 
 ##### 3. Open Android Studio® and install updates, especially when it prompts you install the SDK packages.
-
+  
 ##### 4. In Finder (Mac), locate the 'm280' folder within the cloned repo and copy the "google-services.json" file and paste it in mlkit > app folder. For some reason, Mac deletes the .json file from the m280 > mlkit > app folder. 
 
 ##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project
