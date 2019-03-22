@@ -220,7 +220,7 @@ perf
 
 &nbsp;
 
-Finally, we can visualize the predictions on the test data, indicating an accuracy of almost 95% for our feed-forward neural network:
+Finally, we can visualize the predictions on the test data, indicating an accuracy of about 95% for our feed-forward neural network:
 
 &nbsp;
 
@@ -305,7 +305,7 @@ plot(history)
 
 &nbsp;
 
-We now will run a convolutional neural network which produces 92% accuracy:
+We now will run a convolutional neural network which produces around 92% accuracy:
 
 &nbsp;
 
@@ -353,6 +353,8 @@ history = model %>%
     epochs = 150, 
     batch_size = 50, 
     validation_split = 0.2)
+perf = model %>% 
+  evaluate(x_test, y_test)
 acc = perf$acc %>% 
   round(3) * 100
 y_pred = model %>% 
@@ -381,7 +383,7 @@ result %>%
 
 &nbsp;
 
-Our random forest model was created and produces 82% accuracy:
+Our random forest model was created and produces around 82% accuracy:
 
 &nbsp;
 

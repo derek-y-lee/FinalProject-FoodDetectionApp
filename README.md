@@ -4,7 +4,6 @@
 
 ### Acknowledgement must be given to Google® for their open source provisions, most notably the [mlkit](https://github.com/firebase/quickstart-android) package.
 
-### MEMBER CONTRIBUTIONS:
 ##### Responsibilities: Everyone contributed to all parts of the project, but number 1 was mainly done by Sean and the app (number 2) was mainly completed by Ellen and Derek.
 
 
@@ -27,7 +26,7 @@
 
 ![alt text](https://i.imgur.com/1ibb5oR.png)
   
-##### 4. In Finder (Mac), locate the "m280" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. For some reason, Mac deletes the .json file from the m280 > mlkit > app folder. 
+##### 4. In Finder (Mac), locate the "m280" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. (macOS deletes the .json file from the m280 > mlkit > app folder, so this must be done manually).
 
 ##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project. 
 
