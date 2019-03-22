@@ -24,7 +24,7 @@ Antibody binding is the underpinning of immunology. Since antibodies are peptide
 
 &nbsp;
 
-Although all 20 amino acids are individually known, it is not possible to be able to fully understand what is happening when multiple peptides form a chain. Given that there are 20 amino acids, for 8-chain peptides, over 25 billion peptide chain combinations are possible and given limited resources for in-depth chemical study of each peptide, deep learning may provide a quick way to classify peptide chains in immunology.
+Although all 20 amino acids are individually known, it is not realistically possible to be able to fully understand what is happening when multiple peptides form a chain. Given that there are 20 amino acids, for 8-chain peptides, over 25 billion peptide chain combinations are possible and given limited resources for in-depth chemical study of each peptide, deep learning may provide a quick way to classify peptide chains in immunology.
 
 &nbsp;
 
@@ -88,7 +88,7 @@ The ggseqlogo package can vizualise the sequence motif for the strong binders us
 
 ```{R}
 pep_dat %>% 
-  filter(label_chr=='SB') %>% 
+  filter(label_chr == 'SB') %>% 
   pull(peptide) %>% 
   ggseqlogo()
 ```
@@ -101,7 +101,7 @@ Now, we can prepare our data. Each peptide is encoded into a 2-dimensional 'imag
 
 ```{R}
 pep_dat %>% 
-  filter(label_chr=='SB') %>% 
+  filter(label_chr == 'SB') %>% 
   head(1) %>% 
   pull(peptide) %>% 
   pep_plot_images
@@ -242,11 +242,11 @@ ylab = 'Predicted (Class assigned by Keras/TensorFlow deep FFN)'
 results %>%
   ggplot(aes(x = y_pred, y = y_real, colour = Correct)) +
   geom_point() +
-  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc,"%")) +
+  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc, "%")) +
   xlab(xlab) +
   ylab(ylab) +
   scale_color_manual(labels = c('No', 'Yes'),
-    values = c('tomato','cornflowerblue')) +
+    values = c('tomato', 'cornflowerblue')) +
   geom_jitter() +
   theme_bw()
 ```
@@ -277,9 +277,9 @@ y_test  <- pep_dat %>%
   array
 # Create final arrays to feed into model
 x_train <- array_reshape(x_train, c(nrow(x_train), 9 * 20))
-x_test  <- array_reshape(x_test,  c(nrow(x_test), 9 * 20))
+x_test <- array_reshape(x_test, c(nrow(x_test), 9 * 20))
 y_train <- to_categorical(y_train, num_classes = 3)
-y_test  <- to_categorical(y_test,  num_classes = 3)
+y_test <- to_categorical(y_test, num_classes = 3)
 #Define model 2
 model <- keras_model_sequential() %>% 
   layer_dense(units = 180, activation = 'relu', input_shape = 180) %>% 
@@ -291,7 +291,7 @@ model <- keras_model_sequential() %>%
 model %>% 
   compile(
     loss = 'categorical_crossentropy',
-    optimizer = optimizer_rmsprop(),
+    optimizer = optimizer_rmsprop(lr = 0.0005, rho = 0.9, decay = 0.0),
     metrics = c('accuracy'))
 # Compile model 2
 history = model %>% 
@@ -372,11 +372,11 @@ ylab = 'Predicted (Class assigned by Keras/TensorFlow deep CNN)'
 result %>%
   ggplot(aes(x = y_pred, y = y_real, colour = Correct)) +
   geom_point() +
-  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc,"%")) +
+  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc, "%")) +
   xlab(xlab) +
   ylab(ylab) +
   scale_color_manual(labels = c('No', 'Yes'),
-    values = c('tomato','cornflowerblue')) +
+    values = c('tomato', 'cornflowerblue')) +
   geom_jitter() +
   theme_bw()
 ```
@@ -429,9 +429,9 @@ results %>%
   geom_point() +
   xlab(xlab) +
   ylab(ylab) +
-  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc,"%")) +
+  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc, "%")) +
   scale_color_manual(labels = c('No', 'Yes'),
-    values = c('tomato','cornflowerblue')) +
+    values = c('tomato', 'cornflowerblue')) +
   geom_jitter() +
   theme_bw()
 ```
