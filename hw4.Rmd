@@ -35,6 +35,8 @@ library(tidyverse)
 library(PepTools)
 library(dplyr)
 library("readr", lib.loc="/usr/lib64/R/library")
+install.packages("randomForest")
+library(randomForest)
 ```
 &nbsp;
 Now, we can run our first model, the feed-forward neural network. The following tibbles indicate what the data looks like and that it is balanced:
@@ -186,7 +188,29 @@ results %>%
 In our twist, we halve the learning rate from 0.001 to 0.0005; this has the effect of making the model less sensitive to new input; we can see the result in the smoothing of the visualization of the training progress:
 &nbsp;
 ```{R}
-# Define model 2
+# Turn data into arrays
+x_train <- pep_dat %>% 
+  filter(data_type == 'train') %>% 
+  pull(peptide) %>% 
+  pep_encode
+y_train <- pep_dat %>% 
+  filter(data_type == 'train') %>% 
+  pull(label_num) %>% 
+  array
+x_test  <- pep_dat %>% 
+  filter(data_type == 'test') %>% 
+  pull(peptide) %>% 
+  pep_encode
+y_test  <- pep_dat %>% 
+  filter(data_type == 'test') %>% 
+  pull(label_num) %>% 
+  array
+# Create final arrays to feed into model
+x_train <- array_reshape(x_train, c(nrow(x_train), 9 * 20))
+x_test  <- array_reshape(x_test,  c(nrow(x_test), 9 * 20))
+y_train <- to_categorical(y_train, num_classes = 3)
+y_test  <- to_categorical(y_test,  num_classes = 3)
+#Define model 2
 model <- keras_model_sequential() %>% 
   layer_dense(units = 180, activation = 'relu', input_shape = 180) %>% 
   layer_dropout(rate = 0.4) %>% 
@@ -200,7 +224,7 @@ model %>%
     optimizer = optimizer_rmsprop(),
     metrics = c('accuracy'))
 # Compile model 2
-history <- model %>% 
+history = model %>% 
   fit(
     x_train, y_train, 
     epochs = 150, 
@@ -289,8 +313,6 @@ results %>%
 Our random forest model was created and produces 82% accuracy:
 &nbsp;
 ```{R}
-install.packages("randomForest")
-library(randomForest)
 # Setup training data
 options(warn=-1)
 target <- 'train'
