@@ -4,7 +4,6 @@
 
 ### Acknowledgement must be given to Google® for their open source provisions, most notably the [mlkit](https://github.com/firebase/quickstart-android) package.
 
-### MEMBER CONTRIBUTIONS:
 ##### Responsibilities: Everyone contributed to all parts of the project, but number 1 was mainly done by Sean and the app (number 2) was mainly completed by Ellen and Derek.
 
 
