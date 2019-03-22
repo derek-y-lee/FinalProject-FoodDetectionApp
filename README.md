@@ -16,7 +16,7 @@
 
 ##### 2. Clone (or fork, then clone) the [hw4](https://github.com/seancampeau/hw4) repository to your Android Studio® working directory in your local machine.
 
-##### 3. Open Android Studio® and install updates (including when it prompts you to install the SDK packages). 
+##### 3. Open Android Studio® (Create New Project option) and wait for it to build. Install any updates (including when it prompts you to install the SDK packages). 
 
 ![alt text](https://i.imgur.com/fYs8mm1.png)
 
