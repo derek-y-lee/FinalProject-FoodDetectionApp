@@ -5,7 +5,7 @@
 ##### Responsibilities: Everyone contributed to all parts of the project, but number 1 was mainly done by Sean and the app (number 2) was mainly completed by Ellen and Derek.
 
 
-##### NOTE: For reproducibility, please be sure to follow instructions below.
+##### NOTE: For reproducibility, please be sure to follow instructions below after the remaining notes:
 
 ##### NOTE: Make sure you sign into your Gmail account via Google Chrome on the emulator once it starts. To return to the app, click on the square button on the bottom right and scroll through apps till you find the mlk-test app.
 
