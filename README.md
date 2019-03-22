@@ -27,9 +27,9 @@
 
 ![alt text](https://i.imgur.com/1ibb5oR.png)
   
-##### 4. In Finder (Mac), locate the "m280" folder within the cloned repo and copy the "google-services.json" file and paste it in mlkit > app folder. For some reason, Mac deletes the .json file from the m280 > mlkit > app folder. 
+##### 4. In Finder (Mac), locate the "m280" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. For some reason, Mac deletes the .json file from the m280 > mlkit > app folder. 
 
-##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project 
+##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project. 
 
 ![alt text](https://i.imgur.com/hvG4eCR.png)
 
@@ -48,7 +48,7 @@
 ![alt text](https://i.imgur.com/iuK7RpJ.png)
 
 
-##### 9. Then, once the emulator loads, sign in first to your Google Drive in the Google Chrome browser in the emulator. In the repo, there's a folder called "images" that you should upload into your Google Drive for test purposes. To return to the app, click on the square button on the bottom right and scroll through the apps till you find the mlk-test app once you have the images uploaded in Google Drive. 
+##### 9. Then, once the emulator loads, sign in first to your Google Drive in the Google Chrome browser in the emulator. In the repository, there's a folder called "images" that you should upload into your Google Drive for test purposes. To return to the app, click on the square button on the bottom right and scroll through the apps till you find the mlk-test app once you have the images uploaded in Google Drive. 
 
 
 ##### 10. In the emulator, select StillImageActivity > Take Photo > Select image from album  > navigate to the Google Drive folder "images" with the test images by toggling the upper left logo with the horizontal bars. Select the image and the app should display text describing what objects are in the image.
