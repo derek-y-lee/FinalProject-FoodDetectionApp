@@ -14,13 +14,13 @@
 
 ##### 1. Install the latest version of Android Studio® which can be found [online](https://developer.android.com/studio/install).
 
-##### 2. Clone (or fork, then clone) the [hw4](https://github.com/seancampeau/hw4) repository to your local machine's Android Studio® working directory.
+##### 2. Clone (or fork, then clone) the [hw4](https://github.com/seancampeau/hw4) repository to your Android Studio® working directory in your local machine.
 
 ##### 3. Open Android Studio® and install updates (including when it prompts you to install the SDK packages). 
 
 ![alt text](https://i.imgur.com/fYs8mm1.png)
 
-##### Do NOT opt for Instant Run. Alternatively if you accidentally did so, simply go to Android Studio > Preferences and navigate to the Instant Run sidebar option where you can select to uncheck the "Enable Instant Run."
+##### Do not opt for Instant Run. Alternatively if you accidentally did so, simply go to Android Studio > Preferences and navigate to the Instant Run sidebar option where you can select to uncheck the "Enable Instant Run."
 
 ![alt text](https://i.imgur.com/1ibb5oR.png)
   
@@ -36,7 +36,7 @@
 
 ![alt text](https://i.imgur.com/mVN62Z2.png)
 
-##### 8. Click on "Create New Virtual Device" Use Nexus 5X for its naturally larger resolution. 
+##### 8. Click on "Create New Virtual Device." Use Nexus 5X for its naturally larger resolution. 
 
 ![alt text](https://i.imgur.com/bXJMJjO.png)
 
