@@ -273,7 +273,7 @@ results = tibble(y_real = y_real %>%
     factor)
 title = 'Performance on 10% unseen data - Convolutional Neural Network'
 xlab = 'Measured (Real class, as predicted by netMHCpan-4.0)'
-ylab = 'Predicted (Class assigned by Keras/TensorFlow deep FFN)'
+ylab = 'Predicted (Class assigned by Keras/TensorFlow deep CNN)'
 results %>%
   ggplot(aes(x = y_pred, y = y_real, colour = Correct)) +
   geom_point() +
