@@ -23,7 +23,7 @@
 
 ![alt text](https://i.imgur.com/fYs8mm1.png)
 
-##### Do NOT opt for Instant Run. Alternatively if you accidentally did, simply go to Android Studio > Preferences and navigate to the Instant Run sidebar option where you can select to uncheck the "Enable Instant Run"
+##### Do NOT opt for Instant Run. Alternatively if you accidentally did, simply go to Android Studio > Preferences and navigate to the Instant Run sidebar option where you can select to uncheck the "Enable Instant Run."
 
 ![alt text](https://i.imgur.com/1ibb5oR.png)
   
