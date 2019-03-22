@@ -27,7 +27,7 @@
 
 ![alt text](https://i.imgur.com/1ibb5oR.png)
   
-##### 4. In Finder (Mac), locate the "m280" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. For some reason, Mac deletes the .json file from the m280 > mlkit > app folder. 
+##### 4. In Finder (Mac), locate the "m280" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. (macOS deletes the .json file from the m280 > mlkit > app folder, so this must be done manually).
 
 ##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project. 
 
