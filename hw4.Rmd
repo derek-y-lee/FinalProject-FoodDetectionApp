@@ -271,7 +271,7 @@ results = tibble(y_real = y_real %>%
   factor,
   Correct = ifelse(y_real == y_pred, "yes","no") %>% 
     factor)
-title = 'Performance on 10% unseen data - Feed Forward Neural Network'
+title = 'Performance on 10% unseen data - Convolutional Neural Network'
 xlab = 'Measured (Real class, as predicted by netMHCpan-4.0)'
 ylab = 'Predicted (Class assigned by Keras/TensorFlow deep FFN)'
 results %>%
