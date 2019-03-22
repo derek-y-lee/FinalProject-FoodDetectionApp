@@ -1,27 +1,50 @@
 #Sean Campeau | Ellen Do | Derek Lee
+
 ###Homework 4 | Biostatistics M280
+
 &nbsp;
+
 &nbsp;
+
 &nbsp;
+
 Responsibilities: Everyone contributed to all parts of the project, but number 1 was mainly done by Sean and the app (number 2) was mainly completed by Ellen and Derek.
+
 &nbsp;
+
 ##Q1: Learn by Doing
+
 &nbsp;
+
 We chose to reproduce the "Deep Learning for Cancer Immunotherapy" blog on Rstudio. It can be found at https://blogs.rstudio.com/tensorflow/posts/2018-01-29-dl-for-cancer-immunotherapy/.
+
 &nbsp;
+
 Antibody binding is the underpinning of immunology. Since antibodies are peptides, understanding peptide binding can produce treatments for diseases, including cancer.
+
 &nbsp;
+
 Although all 20 amino acids are individually known, it is not possible to be able to fully understand what is happening when multiple peptides form a chain. Given that there are 20 amino acids, for 8-chain peptides, over 25 billion peptide chain combinations are possible and given limited resources for in-depth chemical study of each peptide, deep learning may provide a quick way to classify peptide chains in immunology.
+
 &nbsp;
-Being able to predict binding properties of peptide chains quickly may hasten understanding of immunological mechanisms behind natural cancer defenses of the body and possibly enable quick, personalized treatments for cancer.
+
+Being able to predict binding properties of peptide chains quickly may hasten understanding of immunological mechanisms behind natural cancer defenses of the body and possibly enable quick, 
+personalized treatments for cancer.
+
 &nbsp;
+
 We would like to use a deep learning model to be able to predict binding properties. We will use a feed-forward neural network, convolutional neural network and a random forest to predict, from an peptide chain of length 8, whether the peptide is weakly-binding, nonbinding, or strong-binding.
+
 &nbsp;
+
 We will first install necessary packages:
+
 &nbsp;
+
 ```{R}
 # Install Keras, Tensorflow and its dependencies
 install.packages("keras", repos = "http://cran.us.r-project.org")
+install.packages("randomForest", repos = "http://cran.us.r-project.org")
 library("keras", lib.loc="~/R/x86_64-redhat-linux-gnu-library/3.5")
 install_keras()
 # Install Tidyverse
@@ -35,12 +58,15 @@ library(tidyverse)
 library(PepTools)
 library(dplyr)
 library("readr", lib.loc="/usr/lib64/R/library")
-install.packages("randomForest")
 library(randomForest)
 ```
+
 &nbsp;
+
 Now, we can run our first model, the feed-forward neural network. The following tibbles indicate what the data looks like and that it is balanced:
+
 &nbsp;
+
 ```{R}
 #Read-in data
 pep_file <- get_file(
@@ -53,18 +79,26 @@ pep_dat %>%
   group_by(label_chr, data_type) %>% 
   summarise(n = n())
 ```
+
 &nbsp;
+
 The ggseqlogo package can vizualise the sequence motif for the strong binders using a sequence logo. Basically, this means which amino acids in which positions are responsible for strong binding:
+
 &nbsp;
+
 ```{R}
 pep_dat %>% 
   filter(label_chr=='SB') %>% 
   pull(peptide) %>% 
   ggseqlogo()
 ```
+
 &nbsp;
+
 Now, we can prepare our data. Each peptide is encoded into a 2-dimensional 'image'. One of such images can be seen below:
+
 &nbsp;
+
 ```{R}
 pep_dat %>% 
   filter(label_chr=='SB') %>% 
@@ -72,15 +106,23 @@ pep_dat %>%
   pull(peptide) %>% 
   pep_plot_images
 ```
+
 &nbsp;
+
 We need to encode our data as a tensor; for example, our data is a 3-D array of number of peptides by length of each peptide by number of amino acids, as seen below:
+
 &nbsp;
+
 ```{R}
 str(pep_encode(c("LLTDAQRIV", "LLTDAQRIV")))
 ```
+
 &nbsp;
+
 We will now transform the data into 3-D arrays for training and testing, and then into matrices and the y values into an integer vector with 3 classes:
+
 &nbsp;
+
 ```{R}
 # Turn data into arrays
 x_train <- pep_dat %>% 
@@ -105,9 +147,13 @@ x_test  <- array_reshape(x_test,  c(nrow(x_test), 9 * 20))
 y_train <- to_categorical(y_train, num_classes = 3)
 y_test  <- to_categorical(y_test,  num_classes = 3)
 ```
+
 &nbsp;
+
 Here, we define the feed-forward model which uses layers via the piping function:
+
 &nbsp;
+
 ```{R}
 # Define model
 model <- keras_model_sequential() %>% 
@@ -117,15 +163,23 @@ model <- keras_model_sequential() %>%
   layer_dropout(rate = 0.3) %>%
   layer_dense(units = 3, activation = 'softmax')
 ```
+
 &nbsp;
+
 Here are the details of the model:
+
 &nbsp;
+
 ```{R}
 summary(model)
 ```
+
 &nbsp;
+
 Finally, we can compile our model with proper loss function, optimizer and metrics:
+
 &nbsp;
+
 ```{R}
 # Train and evaluate model
 model %>% 
@@ -134,9 +188,13 @@ model %>%
     optimizer = optimizer_rmsprop(),
     metrics = c('accuracy'))
 ```
+
 &nbsp;
+
 Now, we can run our model using specified parameters (in this case, 150 epochs with batch size 50 and an validation split of 0.2):
+
 &nbsp;
+
 ```{R}
 # Run model
 history = model %>% 
@@ -147,17 +205,25 @@ history = model %>%
     validation_split = 0.2)
 plot(history)
 ```
+
 &nbsp;
+
 We can evaluate how the model performed on the 10% of left-out data:
+
 &nbsp;
+
 ```{R}
 perf = model %>% 
   evaluate(x_test, y_test)
 perf
 ```
+
 &nbsp;
-Finally, we can visualize the predictions on the test data, indicating an accuracy of almost 95%:
+
+Finally, we can visualize the predictions on the test data, indicating an accuracy of almost 95% for our feed-forward neural network:
+
 &nbsp;
+
 ```{R}
 acc = perf$acc %>% 
   round(3) * 100
@@ -168,7 +234,7 @@ y_real  = y_test %>%
 results = tibble(y_real = y_real %>% 
   factor, y_pred = y_pred %>% 
   factor,
-  Correct = ifelse(y_real == y_pred, "yes","no") %>% 
+  Correct = ifelse(y_real == y_pred, "yes", "no") %>% 
     factor)
 title = 'Performance on 10% unseen data - Feed Forward Neural Network'
 xlab = 'Measured (Real class, as predicted by netMHCpan-4.0)'
@@ -184,9 +250,13 @@ results %>%
   geom_jitter() +
   theme_bw()
 ```
+
 &nbsp;
-In our twist, we halve the learning rate from 0.001 to 0.0005; this has the effect of making the model less sensitive to new input; we can see the result in the smoothing of the visualization of the training progress:
+
+In our twist, we halve the learning rate from 0.001 to 0.0005 on the FFNN; this has the effect of making the model less sensitive to new input; we can see the result in the smoothing of the visualization of the training progress:
+
 &nbsp;
+
 ```{R}
 # Turn data into arrays
 x_train <- pep_dat %>% 
@@ -230,16 +300,15 @@ history = model %>%
     epochs = 150, 
     batch_size = 50, 
     validation_split = 0.2)
-acc = perf$acc %>% 
-  round(3) * 100
-y_pred = model %>% 
-  predict_classes(x_test)
-y_real  = y_test %>% 
-  apply(1, function(x) { return(which(x == 1) - 1) })
+plot(history)
 ```
+
 &nbsp;
+
 We now will run a convolutional neural network which produces 92% accuracy:
+
 &nbsp;
+
 ```{R}
 # Turn data into arrays
 x_train <- pep_dat %>% 
@@ -290,7 +359,7 @@ y_pred = model %>%
   predict_classes(x_test)
 y_real  = y_test %>% 
   apply(1, function(x) { return(which(x == 1) - 1) })
-results = tibble(y_real = y_real %>% 
+result = tibble(y_real = y_real %>% 
   factor, y_pred = y_pred %>% 
   factor,
   Correct = ifelse(y_real == y_pred, "yes","no") %>% 
@@ -298,7 +367,7 @@ results = tibble(y_real = y_real %>%
 title = 'Performance on 10% unseen data - Convolutional Neural Network'
 xlab = 'Measured (Real class, as predicted by netMHCpan-4.0)'
 ylab = 'Predicted (Class assigned by Keras/TensorFlow deep CNN)'
-results %>%
+result %>%
   ggplot(aes(x = y_pred, y = y_real, colour = Correct)) +
   geom_point() +
   ggtitle(label = title, subtitle = paste0("Accuracy = ", acc,"%")) +
@@ -309,12 +378,15 @@ results %>%
   geom_jitter() +
   theme_bw()
 ```
+
 &nbsp;
+
 Our random forest model was created and produces 82% accuracy:
+
 &nbsp;
+
 ```{R}
 # Setup training data
-options(warn=-1)
 target <- 'train'
 x_train <- pep_dat %>% 
   filter(data_type == target) %>% 
@@ -361,9 +433,15 @@ results %>%
   geom_jitter() +
   theme_bw()
 ```
+
 &nbsp;
+
 We have now reproduced the results of the blog.
+
 &nbsp;
+
 ## Q2: Deep Learning on Smart Phone
+
 &nbsp;
+
 Our Android app and its dependencies can be found within the hw4 repository in the folder entitled 'm280'. Please view the 'hw4' README file for detailed instructions.
