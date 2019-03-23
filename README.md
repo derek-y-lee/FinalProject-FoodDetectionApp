@@ -11,11 +11,8 @@
 
 ##### NOTE: Upload any test images onto your Google Drive beforehand so you can access it via Google Drive in the emulator.
 
-<<<<<<< HEAD
-=======
-##### NOTE: The app will prompt you to update Google Play services, please do this.
+##### NOTE: The app will prompt you to update Google Play services, please do so.
 
->>>>>>> 865b813fb443753bbf0def31fded2e27aaa6bf52
 ##### NOTE: If you run into any build errors, make sure that the packages have been installed and the google-services.json has been placed in the app folder within mlkit (mlkit>app) and then try to run again.
 
 
@@ -33,11 +30,7 @@
   
 ##### 4. In Finder (Mac), locate the "hw4-master" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. (macOS deletes the .json file from the m280 > mlkit > app folder, so this must be done manually).
 
-<<<<<<< HEAD
-##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project and selecting the "m280" folder within the "hw4-master" folder
-=======
 ##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project and selecting the "m280" folder within the "hw4-master" folder. Alternatively, you can Open Project if the previous doesn't work.
->>>>>>> 865b813fb443753bbf0def31fded2e27aaa6bf52
 
 ![alt text](https://i.imgur.com/hvG4eCR.png)
 
@@ -66,14 +59,9 @@
 ![alt text](https://i.imgur.com/iuK7RpJ.png)
 
 
-<<<<<<< HEAD
-##### 9. Once the emulator loads, sign in first to your Google Drive in the Google Chrome browser in the emulator. In the repository, there's a folder called "images" that you should upload into your Google Drive for test purposes. To return to the app, click on the square button on the bottom right and scroll through the apps till you find the mlk-test app once you have the images uploaded in Google Drive. 
-=======
 ##### 9. Once the emulator loads, sign in first to your Google Drive in the Google Chrome browser in the emulator. In the repository, there's a folder called "images" that you should upload into your Google Drive for test purposes. This can be uploaded outside of Android Studio. To return to the app, click on the square button on the bottom right and scroll through the apps till you find the mlk-test app once you have the images uploaded in Google Drive. 
->>>>>>> 865b813fb443753bbf0def31fded2e27aaa6bf52
 
 
 ##### 10. In the emulator, select StillImageActivity > Take Photo > Select image from album > navigate to the Google Drive folder "images" with the test images by toggling the upper left logo with the horizontal bars. Select the image and the app should display text describing what objects are in the image.
 
 ![alt text](https://i.imgur.com/etDfMnP.png)
-
