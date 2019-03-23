@@ -28,7 +28,7 @@
   
 ##### 4. In Finder (Mac), locate the "hw4-master" folder within the cloned repository and copy the "google-services.json" file and paste it in mlkit > app folder. (macOS deletes the .json file from the m280 > mlkit > app folder, so this must be done manually).
 
-##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project and selecting the "m280" folder within the "hw4-master" folder
+##### 5. Import the files as a project, and specifically import the mlkit folder by going to Android Studio® and navigating to File > New > Import Project and selecting the "m280" folder within the "hw4-master" folder. Alternatively, you can Open Project if the previous doesn't work.
 
 ![alt text](https://i.imgur.com/hvG4eCR.png)
 
@@ -52,12 +52,12 @@
 
 ![alt text](https://i.imgur.com/bXJMJjO.png)
 
-##### Once you select Nexus 5X, download Android 8.1 "Oreo".
+##### Once you select Nexus 5X, download Android 8.1 "Oreo". This may take a while.
 
 ![alt text](https://i.imgur.com/iuK7RpJ.png)
 
 
-##### 9. Once the emulator loads, sign in first to your Google Drive in the Google Chrome browser in the emulator. In the repository, there's a folder called "images" that you should upload into your Google Drive for test purposes. To return to the app, click on the square button on the bottom right and scroll through the apps till you find the mlk-test app once you have the images uploaded in Google Drive. 
+##### 9. Once the emulator loads, sign in first to your Google Drive in the Google Chrome browser in the emulator. In the repository, there's a folder called "images" that you should upload into your Google Drive for test purposes. This can be uploaded outside of Android Studio. Additionally, the app will prompt you to update/install Google Play services, follow these instructions. To return to the app, click on the square button on the bottom right and scroll through the apps till you find the mlk-test app once you have the images uploaded in Google Drive. 
 
 
 ##### 10. In the emulator, select StillImageActivity > Take Photo > Select image from album > navigate to the Google Drive folder "images" with the test images by toggling the upper left logo with the horizontal bars. Select the image and the app should display text describing what objects are in the image.
