@@ -32,7 +32,7 @@
 
 ![alt text](https://i.imgur.com/hvG4eCR.png)
 
-![alt text](https://i.imgur.com/S9xAdhd.png)
+![alt text](https://i.imgur.com/VFEMeO6.png)
 
 ##### 5.5. Click next throughout the process (see images below as guide). The SDK installation is probably at this step. There will likely be a prompt to configure Kotlin. Just select that message and click on the Java module version.
 
