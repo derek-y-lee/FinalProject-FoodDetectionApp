@@ -57,7 +57,7 @@ library(keras)
 library(tidyverse)
 library(PepTools)
 library(dplyr)
-library("readr", lib.loc="/usr/lib64/R/library")
+library("readr", lib.loc = "/usr/lib64/R/library")
 library(randomForest)
 ```
 
@@ -267,11 +267,11 @@ y_train <- pep_dat %>%
   filter(data_type == 'train') %>% 
   pull(label_num) %>% 
   array
-x_test  <- pep_dat %>% 
+x_test <- pep_dat %>% 
   filter(data_type == 'test') %>% 
   pull(peptide) %>% 
   pep_encode
-y_test  <- pep_dat %>% 
+y_test <- pep_dat %>% 
   filter(data_type == 'test') %>% 
   pull(label_num) %>% 
   array
@@ -319,19 +319,19 @@ y_train <- pep_dat %>%
   filter(data_type == 'train') %>% 
   pull(label_num) %>% 
   array
-x_test  <- pep_dat %>% 
+x_test <- pep_dat %>% 
   filter(data_type == 'test') %>% 
   pull(peptide) %>% 
   pep_encode
-y_test  <- pep_dat %>% 
+y_test <- pep_dat %>% 
   filter(data_type == 'test') %>% 
   pull(label_num) %>% 
   array
 # Create final arrays to feed into model
 x_train <- array_reshape(x_train, c(nrow(x_train), 9, 20, 1))
-x_test  <- array_reshape(x_test,  c(nrow(x_test), 9, 20, 1))
+x_test <- array_reshape(x_test, c(nrow(x_test), 9, 20, 1))
 y_train <- to_categorical(y_train, num_classes = 3)
-y_test  <- to_categorical(y_test,  num_classes = 3)
+y_test <- to_categorical(y_test, num_classes = 3)
 model <- keras_model_sequential() %>%
   layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = 'relu',
     input_shape = c(9, 20, 1)) %>%
@@ -359,12 +359,12 @@ acc = perf$acc %>%
   round(3) * 100
 y_pred = model %>% 
   predict_classes(x_test)
-y_real  = y_test %>% 
+y_real = y_test %>% 
   apply(1, function(x) {return(which(x == 1) - 1)})
 result = tibble(y_real = y_real %>% 
   factor, y_pred = y_pred %>% 
   factor,
-  Correct = ifelse(y_real == y_pred, "yes","no") %>% 
+  Correct = ifelse(y_real == y_pred, "yes" ,"no") %>% 
     factor)
 title = 'Performance on 10% unseen data - Convolutional Neural Network'
 xlab = 'Measured (Real class, as predicted by netMHCpan-4.0)'
@@ -421,8 +421,8 @@ results <- tibble(y_real = y_test,
   Correct = ifelse(y_real == y_pred, "yes", "no") %>% 
     factor)
 title = "Performance on 10% unseen data - Random Forest"
-xlab  = "Measured (Real class, as predicted by netMHCpan-4.0)"
-ylab  = "Predicted (Class assigned by random forest)"
+xlab = "Measured (Real class, as predicted by netMHCpan-4.0)"
+ylab = "Predicted (Class assigned by random forest)"
 f_out = "plots/03_rf_01_results_3_by_3_confusion_matrix.png"
 results %>%
   ggplot(aes(x = y_pred, y = y_real, colour = Correct)) +
