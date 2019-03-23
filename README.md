@@ -11,6 +11,8 @@
 
 ##### NOTE: Upload any test images onto your Google Drive beforehand so you can access it via Google Drive in the emulator.
 
+##### NOTE: The app will prompt you to update Google Play services, please do so.
+
 ##### NOTE: If you run into any build errors, make sure that the packages have been installed and the google-services.json has been placed in the app folder within mlkit (mlkit>app) and then try to run again.
 
 
@@ -57,7 +59,7 @@
 ![alt text](https://i.imgur.com/iuK7RpJ.png)
 
 
-##### 9. Once the emulator loads, sign in first to your Google Drive in the Google Chrome browser in the emulator. In the repository, there's a folder called "images" that you should upload into your Google Drive for test purposes. This can be uploaded outside of Android Studio. Additionally, the app will prompt you to update/install Google Play services, follow these instructions. To return to the app, click on the square button on the bottom right and scroll through the apps till you find the mlk-test app once you have the images uploaded in Google Drive. 
+##### 9. Once the emulator loads, sign in first to your Google Drive in the Google Chrome browser in the emulator. In the repository, there's a folder called "images" that you should upload into your Google Drive for test purposes. This can be uploaded outside of Android Studio. To return to the app, click on the square button on the bottom right and scroll through the apps till you find the mlk-test app once you have the images uploaded in Google Drive. 
 
 
 ##### 10. In the emulator, select StillImageActivity > Take Photo > Select image from album > navigate to the Google Drive folder "images" with the test images by toggling the upper left logo with the horizontal bars. Select the image and the app should display text describing what objects are in the image.
